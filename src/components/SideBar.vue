@@ -80,7 +80,6 @@ export default defineComponent({
       };
     },
   },
-
   data() {
     return {
       sideBarClass: bem("side-bar", { strict: false }),

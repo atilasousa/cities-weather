@@ -37,7 +37,7 @@ export default new Vuex.Store({
     async getInitialCities(context) {
       return await axios
         .get(
-          `${baseApiService.getUrl()}/group?id=524901,703448,2643743,2643743&appid=${baseApiService.getApiKey()}&units=metric&lang=pt`
+          `${baseApiService.getUrl()}/group?id=2240449,3448439,524901,703448,2643743&appid=${baseApiService.getApiKey()}&units=metric&lang=pt`
         )
         .then((res) => {
           context.commit("setCities", res.data.list);
