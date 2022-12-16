@@ -15,10 +15,11 @@
 </template>
 <script lang="ts">
 import bem from "bem-ts";
+import { defineComponent } from "vue";
 import { mapActions } from "vuex";
 import Swal from "sweetalert2";
 
-export default {
+export default defineComponent({
   name: "AddCity",
   data() {
     return {
@@ -31,8 +32,7 @@ export default {
       getSpecificCity: "getSpecificCity",
       addCityToList: "addCityToList",
     }),
-
-    getCity() {
+    getCity():void {
       this.getSpecificCity(this.city).then((res) => {
         this.addCityToList(res.data);
         Swal.fire({
@@ -46,7 +46,7 @@ export default {
       });
     },
   },
-};
+});
 </script>
 <style lang="scss">
 .add-city {

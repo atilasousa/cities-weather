@@ -24,8 +24,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
 import bem from "bem-ts";
+import { defineComponent } from "vue";
 import VueApexCharts from "vue-apexcharts";
 import { ICityDayTemp } from "@/interfaces/cityDayTemp";
 import { ICityMetaInfo } from "@/interfaces/cityMetaInfo";
@@ -47,10 +47,10 @@ export default defineComponent({
     },
   },
   computed: {
-    temps() {
-      return this.cityLastFiveDaysTemp.map((el) => el.temp);
+    temps(): Array<number> {
+      return this.cityLastFiveDaysTemp.map((el: ICityDayTemp) => el.temp);
     },
-    chartOptions() {
+    chartOptions():any {
       return {
         chart: {
           height: 350,
@@ -59,7 +59,6 @@ export default defineComponent({
             enabled: false,
           },
         },
-
         stroke: {
           curve: "straight",
         },

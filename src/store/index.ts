@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import { IWeatherInfo } from "@/interfaces/Weather";
 import { baseApiService } from "@/services/BaseApiService";
 import axios from "axios";
-import { cityPositionAndTime } from "@/interfaces/CityPosition";
+import { ICityPositionAndTime } from "@/interfaces/CityPosition";
 
 Vue.use(Vuex);
 
@@ -41,6 +41,7 @@ export default new Vuex.Store({
         )
         .then((res) => {
           context.commit("setCities", res.data.list);
+          console.log(res.data.list);
         });
     },
     async getSpecificCity(context, city: string) {
@@ -48,7 +49,7 @@ export default new Vuex.Store({
         `${baseApiService.getUrl()}/weather?q=${city}&appid=${baseApiService.getApiKey()}&units=metric`
       );
     },
-    async getLastFiveDaysTemp(context, cityInfo: cityPositionAndTime) {
+    async getLastFiveDaysTemp(context, cityInfo: ICityPositionAndTime) {
       const dayInTimeStamp = 60 * 60 * 24;
 
       const data = await Promise.all(

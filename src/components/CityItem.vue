@@ -12,13 +12,19 @@
         </h2>
       </header>
       <div :class="cityItemClass('content')" class="mb-8">
-        <span :class="cityItemClass('temperature')"
-          >{{ weatherInfo?.main.temp }}°C</span
-        >
-        <small
-          >Max: {{ weatherInfo?.main.temp_max }}°C / Min:
-          {{ weatherInfo?.main.temp_min }}°C</small
-        >
+        <span :class="cityItemClass('temperature')">
+          {{ weatherInfo?.main.temp }}°C
+        </span>
+        <div :class="cityItemClass('clime')">
+          <img :src="`http://openweathermap.org/img/wn/${weatherInfo.weather[0].icon}@2x.png`">
+          <span>
+            {{weatherInfo.weather[0].description}}
+          </span>
+        </div>
+        <small>
+          Max: {{ weatherInfo?.main.temp_max }}°C / Min:
+          {{ weatherInfo?.main.temp_min }}°C
+        </small>
       </div>
       <div :class="cityItemClass('details')" class="row px-4 mb-4">
         <div :class="cityItemClass('detail')">
@@ -35,7 +41,7 @@
         </div>
       </div>
       <div class="w-100 text-left">
-        <v-btn @click="$emit('cityClicked')">Detalhes</v-btn>
+        <v-btn :class="cityItemClass('button-details')" color="indigo" @click="$emit('cityClicked')">Detalhes</v-btn>
       </div>
     </v-card>
   </v-col>
@@ -59,10 +65,10 @@ export default defineComponent({
     };
   },
   computed: {
-    speed() {
+    speed():number {
       return this.weatherInfo.wind.speed * 3.6;
     },
-    visibility() {
+    visibility():number {
       return this.weatherInfo.visibility / 1000;
     },
   },
@@ -70,6 +76,11 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .city-item {
+  .v-card{
+    color: white;
+    background-color: #7e7e7e !important;
+  }
+
   &__header {
     display: flex;
     flex-direction: column;
@@ -83,11 +94,18 @@ export default defineComponent({
     .fa-trash {
       cursor: pointer;
       color: #ee2c2c;
+      font-size: 1.2rem;
     }
   }
 
   &__city-name {
     font-weight: 500;
+  }
+
+  &__clime{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__temperature {
@@ -101,6 +119,10 @@ export default defineComponent({
 
   &__details {
     justify-content: space-between;
+  }
+
+  &__button-details{
+    color: white !important;
   }
 
   &__detail {
