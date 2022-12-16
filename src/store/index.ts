@@ -41,7 +41,6 @@ export default new Vuex.Store({
         )
         .then((res) => {
           context.commit("setCities", res.data.list);
-          console.log(res.data.list);
         });
     },
     async getSpecificCity(context, city: string) {

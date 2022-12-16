@@ -6,6 +6,7 @@
         :class="addCityClass('search-input')"
         placeholder="Digite aqui o nome da cidade"
         class="mr-3 mb-2 col-md-8 col-sm-6 col-xs-4"
+        @keyup.enter="getCity"
       />
       <v-btn :class="addCityClass('button')" large @click="getCity"
         >Adicionar</v-btn
@@ -43,6 +44,14 @@ export default defineComponent({
           timer: 1500,
         });
         this.city = "";
+      }).catch(err=>{
+        if(err.response.data.cod){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Cidade não encontrada',
+          });
+        }
       });
     },
   },
