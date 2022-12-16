@@ -2,8 +2,8 @@
   <v-col md="4" sm="6" xs="12" :class="cityItemClass()">
     <v-card class="px-4 pt-4 pb-6 text-center">
       <header :class="cityItemClass('header')" class="mb-3">
-        <div :class="cityItemClass('deleteButton')">
-          <v-btn @click="$emit('removeCity')" icon>
+        <div :class="cityItemClass('deleteButton-holder')">
+          <v-btn :class="cityItemClass('button-delete')" @click="$emit('removeCity')" icon>
             <font-awesome-icon icon="fa-solid fa-trash" class="text-left" />
           </v-btn>
         </div>

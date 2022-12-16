@@ -1,6 +1,5 @@
 import {mount} from "@vue/test-utils";
 import CityItem from "@/components/CityItem.vue";
-import { IWeatherInfo } from "@/interfaces/Weather";
 
 const createWrapper = () => {
   return mount(CityItem,{
@@ -45,14 +44,40 @@ const createWrapper = () => {
         "dt": 1671188824,
         "id": 524901,
         "name": "Moscow"
+    },
     }
-    }
+
   });
 };
 
 it("expect all texts to be rendered", () => {
   const wrapper = createWrapper();
 
-  expect(wrapper.html()).toMatchSnapshot();
+  expect(wrapper.text()).toContain("Moscow");
+  expect(wrapper.text()).toContain("Ru");
+  expect(wrapper.text()).toContain("nublado");
+  expect(wrapper.text()).toContain("-4.09");
+  expect(wrapper.text()).toContain("-2.9");
+  expect(wrapper.text()).toContain("2.87");
 });
 
+
+describe("when buttonDelete is clicked", () => {
+    it("emits removeCity event", async () => {
+      const wrapper = createWrapper();
+      const buttonDelete = wrapper.find(".city-item__button-delete");
+      await buttonDelete.trigger("click");
+
+      expect(wrapper.emitted("removeCity")).toBeTruthy();
+    });
+  });
+
+describe("when buttonDetails is clicked", () => {
+    it("emits cityClicked event", async () => {
+      const wrapper = createWrapper();
+      const buttonDetails = wrapper.find(".city-item__button-details");
+      await buttonDetails.trigger("click");
+
+      expect(wrapper.emitted("cityClicked")).toBeTruthy();
+    });
+  });
